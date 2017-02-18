@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
     @current_cart ||= find_cart
   end
 
+  def admin_required
+    if !current_user.admin?
+      redirect_to "/",alert: "You are not admin."
+    end
+  end
+
   private
 
   def find_cart
